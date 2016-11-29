@@ -8,9 +8,11 @@ Integrates with [Check_MK](https://mathias-kettner.com/check_mk.html) monitoring
 
 ### Install Check_MK pack on StackStorm
 
-Install the [StackStorm Check_MK integration pack](https://github.com/StackStorm/st2contrib/tree/master/packs/check_mk):
+Install the [StackStorm Check_MK integration pack](https://github.com/StackStorm-Exchange/stackstorm-check_mk):
 
-        st2 run packs.install packs=check_mk
+```
+st2 pack install check_mk
+```
 
 ### Configure Check_MK to send events to StackStorm
 
