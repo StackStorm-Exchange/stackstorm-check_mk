@@ -1,0 +1,14 @@
+# Change Log
+
+## 0.2.0
+
+- Modified Check\_MK handler script to add 'webhooks/st2' to URL.
+- Cast trace-tag as a string
+
+## 0.1.1
+
+- Metadata update only
+
+## 0.1.0
+
+- First release 

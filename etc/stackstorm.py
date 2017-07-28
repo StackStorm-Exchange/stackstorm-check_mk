@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # StackStorm
 
-import requests
 import time
 import os
 import uuid
-import yaml
 import sys
+from urlparse import urljoin
+import yaml
+import requests
 
 # Check_MK configuration
 
@@ -18,6 +19,7 @@ CMK_ENV_PREFIX = 'NOTIFY_'
 ST2_API_BASE_URL = 'https://localhost/api/v1/'
 ST2_TRIGGERTYPE_REF = 'check_mk.event_handler'
 ST2_VERIFY_SSL = False
+ST2_WEBHOOKS_PATH = 'webhooks/st2'
 
 
 def main(config_file=CMK_CONFIG_FILE):
@@ -26,6 +28,7 @@ def main(config_file=CMK_CONFIG_FILE):
     st2_trigger = config.get('st2_triggertype_ref', ST2_TRIGGERTYPE_REF)
     st2_verify_ssl = config.get('st2_verify_ssl', ST2_VERIFY_SSL)
     cmk_env_prefix = config.get('cmk_env_prefix', CMK_ENV_PREFIX)
+    st2_webhooks_path = config.get('st2_webhooks_path', ST2_WEBHOOKS_PATH)
 
     # gather all options from env
     context = dict([(key[len(cmk_env_prefix):], value.decode("utf-8"))
@@ -36,10 +39,11 @@ def main(config_file=CMK_CONFIG_FILE):
     payload = build_payload(context)
     headers = {
         'St2-Api-Key': config['api_key'],
-        'St2-Trace-Tag': trace_tag
+        'St2-Trace-Tag': str(trace_tag)
     }
 
-    r = post_event_to_st2(st2_api_base_url, st2_trigger, payload, headers, verify=st2_verify_ssl)
+    url = urljoin(st2_api_base_url, st2_webhooks_path)
+    r = post_event_to_st2(url, st2_trigger, payload, headers, verify=st2_verify_ssl)
     print "Sent event to StackStorm. HTTP_CODE: %d. TRACE_TAG: %s" % (r.status_code, trace_tag)
 
 
