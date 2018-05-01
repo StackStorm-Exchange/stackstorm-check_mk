@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.2.1
+
+- Changed `stackstorm.py` to search for `st2_api_key` in config, not `api_key`
+
 ## 0.2.0
 
 - Modified Check\_MK handler script to add 'webhooks/st2' to URL.

@@ -38,7 +38,7 @@ def main(config_file=CMK_CONFIG_FILE):
     trace_tag = uuid.uuid4()  # check_mk doesn't provide its own notification id
     payload = build_payload(context)
     headers = {
-        'St2-Api-Key': config['api_key'],
+        'St2-Api-Key': config['st2_api_key'],
         'St2-Trace-Tag': str(trace_tag)
     }
 
@@ -55,8 +55,8 @@ def read_config(config_file):
         print "Could not read file: %s" % config_file
         sys.exit(1)
 
-    if "api_key" not in config:
-        print "Required parameter %s missing from config file: %s" % ("api_key", config_file)
+    if "st2_api_key" not in config:
+        print "Required parameter %s missing from config file: %s" % ("st2_api_key", config_file)
         sys.exit(2)
 
     return config
