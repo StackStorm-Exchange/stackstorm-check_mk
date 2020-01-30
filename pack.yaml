@@ -3,9 +3,9 @@ ref: check_mk
 name: check_mk
 description: Check_MK integrations
 keywords:
-- check_mk
-- monitoring
-- alerting
+  - check_mk
+  - monitoring
+  - alerting
 version: 0.2.1
 author: codyaray
 email: talktome@codyaray.com
