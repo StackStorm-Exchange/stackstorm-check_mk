@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # StackStorm
+from __future__ import print_function
 
 import time
 import os
@@ -44,7 +45,7 @@ def main(config_file=CMK_CONFIG_FILE):
 
     url = urljoin(st2_api_base_url, st2_webhooks_path)
     r = post_event_to_st2(url, st2_trigger, payload, headers, verify=st2_verify_ssl)
-    print "Sent event to StackStorm. HTTP_CODE: %d. TRACE_TAG: %s" % (r.status_code, trace_tag)
+    print("Sent event to StackStorm. HTTP_CODE: %d. TRACE_TAG: %s" % (r.status_code, trace_tag))
 
 
 def read_config(config_file):
