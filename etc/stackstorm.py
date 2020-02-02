@@ -6,9 +6,10 @@ import time
 import os
 import uuid
 import sys
-from urlparse import urljoin
 import yaml
 import requests
+
+from six.moves.urllib.parse import urljoin
 
 # Check_MK configuration
 
@@ -53,11 +54,11 @@ def read_config(config_file):
         with open(config_file) as f:
             config = yaml.safe_load(f)
     except IOError:
-        print "Could not read file: %s" % config_file
+        print("Could not read file: %s" % config_file)
         sys.exit(1)
 
     if "st2_api_key" not in config:
-        print "Required parameter %s missing from config file: %s" % ("st2_api_key", config_file)
+        print("Required parameter %s missing from config file: %s" % ("st2_api_key", config_file))
         sys.exit(2)
 
     return config
@@ -150,7 +151,7 @@ def post_event_to_st2(url, trigger, payload, headers, verify=False):
         r.raise_for_status()
         return r
     except requests.exceptions.RequestException as e:
-        print "Error posting event to StackStorm: %s" % e
+        print("Error posting event to StackStorm: %s" % e)
         sys.exit(3)
 
 
