@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.2.2
+
+- Fixups for Python 3 compatibility
+- Add explicit support for Python 2 and 3
+
 ## 0.2.1
 
 - Changed `stackstorm.py` to search for `st2_api_key` in config, not `api_key`
